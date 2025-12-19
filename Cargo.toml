@@ -1,0 +1,46 @@
+[package]
+name = "translators"
+version = "0.1.5"
+edition = "2021"
+authors = ["charl1e7"]
+description = "Free Google Translator without API key and limits."
+license = "MIT"
+repository = "https://github.com/charl1e7/rust-translators"
+homepage = "https://github.com/charl1e7/rust-translators"
+readme = "README.md"
+keywords = ["translate", "google", "language", "async"]
+documentation = "https://docs.rs/translators/0.1.5/translators/"
+exclude = ["tests/", "examples/", ".vscode/"]
+categories = ["asynchronous", "api-bindings"]
+
+[dependencies]
+reqwest = { version = "0.12", default-features = false, features = [
+    "json",
+    "rustls-tls",
+    "blocking",
+    "socks",
+] }
+tokio = { version = "1.28.1", features = ["macros", "rt-multi-thread"], optional = true }
+futures = { version = "0.3", optional = true }
+urlencoding = "2.1"
+html-escape = "0.2"
+regex = "1.11"
+macon = "1.2"
+
+
+[features]
+all = ["tokio-async", "google"]
+google = []
+tokio-async = ["dep:tokio", "dep:futures"]
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros"] }
+
+[package.metadata.docs.rs]
+all-features = true
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[[example]]
+name = "google_async"
+path = "examples/google/async.rs"
