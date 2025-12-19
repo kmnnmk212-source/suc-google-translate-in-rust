@@ -20,3 +20,10 @@ cd rust-translators
 
 
 cargo run --example google_async --features "google tokio-async"
+
+
+
+
+let target_lang = "ar"; 
+
+change ar to fr or es
